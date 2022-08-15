@@ -22,7 +22,7 @@ router.get("/login/success", (req, res) => {
 })
 
 router.get("/google/home", passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/home",
+    successRedirect: "https://eventorganization.herokuapp.com/home",
     failureRedirect: "/auth/login/failed",
 }))
 
