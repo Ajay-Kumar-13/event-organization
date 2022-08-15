@@ -36,17 +36,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: 'https://eventorganization.herokuapp.com/',
+    // origin: 'https://eventorganization.herokuapp.com/',
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
 }))
 
 app.use("/auth", authRoute);
-
-
-app.get("/", (req, res) => {
-    res.redirect("/")
-})
 
 app.post("/upload", (req, res) => {
     upload(req, res, (err) => {
