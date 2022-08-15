@@ -45,7 +45,7 @@ app.use("/auth", authRoute);
 
 
 app.get("/", (req, res) => {
-    res.send("HI i am there")
+    res.redirect("/")
 })
 
 app.post("/upload", (req, res) => {
