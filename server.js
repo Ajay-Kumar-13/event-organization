@@ -43,6 +43,11 @@ app.use(cors({
 
 app.use("/auth", authRoute);
 
+
+app.get("/", (req, res) => {
+    res.send("HI i am there")
+})
+
 app.post("/upload", (req, res) => {
     upload(req, res, (err) => {
         if (err) {
