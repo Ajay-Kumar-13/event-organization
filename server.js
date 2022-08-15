@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
@@ -11,7 +12,7 @@ const multer = require("multer");
 const fsx = require("fs-extra");
 
 const app = express();
-mongoose.connect("mongodb+srv://Ajay-kumar:Ajaykumar$13@cluster0.ofmxz.mongodb.net/eclubUsers");
+mongoose.connect(process.env.MONGO_URI);
 
 const Storage = multer.diskStorage({
     destination: "uploads",
@@ -60,7 +61,7 @@ app.post("/upload", (req, res) => {
 if(process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.sendFile(path.resolve(__dirname,"client", "build", "index.html"))
     })
 }
 
