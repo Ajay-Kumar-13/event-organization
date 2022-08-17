@@ -37,7 +37,7 @@ function CarouselComponent() {
                 />
                 <Carousel.Caption>
                     <h3 className="carouselTitle">Concert</h3>
-                    <p className="carouselText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p className="carouselText">Lore ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
