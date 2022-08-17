@@ -36,7 +36,7 @@ function UserdetailsModel(props) {
     }
 
     return (
-        <Modal.Dialog>
+        <Modal.Dialog style={{width: "50%"}}>
             <Modal.Header closeButton>
                 <Modal.Title>User Details</Modal.Title>
             </Modal.Header>
