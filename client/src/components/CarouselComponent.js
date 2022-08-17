@@ -19,7 +19,7 @@ function CarouselComponent() {
                 <img
                     className="d-block w-100 carouselImage"
                     alt="Cultural Night Image"
-                    src={"culturalnight.png"}
+                    src="culturalnight.png"
                     // style={{ opacity: "0.7" }}
                 />
                 <Carousel.Caption>

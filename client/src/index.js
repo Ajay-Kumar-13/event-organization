@@ -11,20 +11,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CarnivalComponent from './components/CarnivalComponent';
 import CreateEvent from './components/CreateEvent';
 import Success from './components/success';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<App />} />
-				<Route path="/home" element={<HomeComponent />} />
-				<Route path="/register" element={<CarnivalComponent />} />
-				<Route path="/createEvent" element={<CreateEvent />}/>
-				<Route path='/success' element={<Success />}/>
-			</Routes>
-		</BrowserRouter>
-
+		<TransitionGroup>
+			<CSSTransition classNames="page" timeout={300}>
+				<BrowserRouter>
+					<Routes>
+						<Route path="/" element={<App />} />
+						<Route path="/home" element={<HomeComponent />} />
+						<Route path="/register" element={<CarnivalComponent />} />
+						<Route path="/createEvent" element={<CreateEvent />} />
+						<Route path='/success' element={<Success />} />
+					</Routes>
+				</BrowserRouter>
+			</CSSTransition>
+		</TransitionGroup>
 	</React.StrictMode>
 );
 
