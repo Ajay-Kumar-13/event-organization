@@ -1,14 +1,28 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import GooglePayButton from "@google-pay/button-react";
+import { Card, Button } from "react-bootstrap";
+// import GooglePayButton from "@google-pay/button-react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function CardComponent(props) {
 
     const navigate = useNavigate();
+
+    const handlePayment = ()=> {
+        const d = new Date();
+        let month = parseInt(d.getMonth())+1
+        const details = {
+            email: props.email,
+            eventName: props.eventName,
+            date:  d.getDate()+'/'+month+'/'+d.getFullYear()
+        }
+        axios.post("/auth/registerEvent",details)
+            .then(response => response.data.success ? navigate("/success") : new Error("Some Problem in registering this event!"));
+    }
+
     return (
         <div className="col-12 col-sm-6">
-            <Card style={{ width: '18rem', backgroundImage: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)' }}>
+            <Card style={{ width: '18rem', backgroundImage: 'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)', fontFamily: 'Noto Sans' }}>
                 <Card.Body>
                     <Card.Img src={`${props.eventName}.png`} style={{ transform: 'scale(1)' }} />
                     <Card.Title>{props.eventName}</Card.Title>
@@ -18,9 +32,9 @@ function CardComponent(props) {
                         <p>Date: {props.eventDate}</p>
                         <p>Price: {props.price}/-</p>
                     </Card.Text>
-                    {/* <Button variant="outline-success">Proceed to Payment</Button> */}
+                    <Button variant="outline-success" onClick={handlePayment}>Proceed to Payment</Button>
         
-                    <GooglePayButton
+                    {/* <GooglePayButton
                         environment="TEST"
                         paymentRequest={{
                             apiVersion: 2,
@@ -71,7 +85,7 @@ function CardComponent(props) {
                         existingPaymentMethodRequired= "false"
                         buttonColor="white"
                         buttonType="pay"
-                    />
+                    /> */}
                 </Card.Body>
             </Card>
         </div>

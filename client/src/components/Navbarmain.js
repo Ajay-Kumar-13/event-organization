@@ -81,7 +81,7 @@ function Navbarmain() {
                         <NavLink className="home" href='/home'>Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink className="home" href="/register">Carnival Pass</NavLink>
+                        <NavLink className="home" href="/register">Event Pass</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className="home" onClick={handleShow}>Contact Us</NavLink>

@@ -1,8 +1,10 @@
+require('dotenv').config();
 const router = require("express").Router();
 const passport = require("passport");
 const newUser = require("../models/usersModel");
 const Query = require("../models/queryModel");
 const Event = require("../models/eventModel");
+const register = require("../models/registrationModel");
 
 router.get("/login/failed", (req, res) => {
     res.status(401).json({
@@ -22,7 +24,7 @@ router.get("/login/success", (req, res) => {
 })
 
 router.get("/google/home", passport.authenticate("google", {
-    successRedirect: "https://eventorganization.herokuapp.com/home",
+    successRedirect: process.env.REDIRECT_URI + "/home",
     failureRedirect: "/auth/login/failed",
 }))
 
@@ -115,12 +117,29 @@ router.post("/createEvent", (req, res) => {
 
 router.get("/presentEvents", (req, res) => {
     Event.find({}, (err, docs) => {
-        if(!err)
-        {
+        if (!err) {
             res.json(docs)
         }
-        
+
     })
+})
+
+router.post("/registerEvent", (req, res) => {
+    register.create({
+        email: req.body.email,
+        eventName: req.body.eventName,
+        date: req.body.date
+    })
+        .then(response => {
+            res.json({
+                success: true
+            })
+        })
+        .catch(response => {
+            res.json({
+                success: false
+            })
+        })
 })
 
 module.exports = router;

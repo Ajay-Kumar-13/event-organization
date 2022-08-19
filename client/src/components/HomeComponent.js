@@ -38,7 +38,7 @@ function HomeComponent() {
         <React.Fragment>
             {Registered ?<Navbarmain /> : null}
             {Registered ? null : <UserdetailsModel email={user}/>}
-            {Registered ? <Jumbotron condition={admin}/> : null}
+            {Registered ? <Jumbotron condition={admin} email={user}/> : null}
             {Registered ? <CarouselComponent /> : null}
             {Registered ? <Footer /> : null}
         </React.Fragment>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormControl, FormGroup, FormLabel, Button } from "react-bootstrap";
+import { Form, FormControl, FormGroup, FormLabel, Button, InputGroup } from "react-bootstrap";
 import Navbarmain from "./Navbarmain";
 import DatePicker from "react-datepicker";
 import { withFormik } from "formik";
@@ -10,10 +10,11 @@ import moment from "moment";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
+
 function CreateEvent() {
-
     const navigate = useNavigate();
-
+    const [validate, setValidate] = useState(false);
     const [dispatchStartTime, setDispatchStartTime] = useState(moment());
     const [dispatchEndTime, setDispatchEndTime] = useState(moment());
     const [eventDetails, setEventDetails] = useState({
@@ -64,12 +65,24 @@ function CreateEvent() {
         })
     }
 
-    const handleSubmit = () => {
+    const submitData = () => {
         axios.post("/auth/createEvent", eventDetails)
             .then(response => {
                 response.data.success ? navigate("/register") : window.location.reload();
             })
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidate(true);
+        } else {
+            submitData();
+        }
+    }
+
 
     const handleUpload = (name) => {
 
@@ -81,7 +94,7 @@ function CreateEvent() {
     }
 
     const handleImage = (e) => {
-        
+
         setImage(e.target.files[0]);
 
     }
@@ -103,7 +116,6 @@ function CreateEvent() {
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="validationFormik03">
                         <Form.Label>Date</Form.Label>
-
                         <DatePicker
                             selected={values.date}
                             minDate={today}
@@ -152,16 +164,27 @@ function CreateEvent() {
         <React.Fragment>
             <Navbarmain />
             <div className="container">
-                <Form >
-                    <FormGroup>
+                <Form className="eventForm" noValidate validated={validate} onSubmit={handleSubmit}>
+                    <FormGroup className="mb-3" controlId="validationCustom01">
                         <FormLabel>Name</FormLabel>
-                        <FormControl placeholder="Enter Event Name" onChange={handleChange} name="eventName" value={eventDetails.name}></FormControl>
+                        <FormControl required placeholder="Enter Event Name" onChange={handleChange} name="eventName" value={eventDetails.name}></FormControl>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="mb-3" controlId="validationCustom02">
                         <FormLabel>Description</FormLabel>
-                        <FormControl as="textarea" rows="3" placeholder="Enter Event Description" onChange={handleChange} name="eventDescription" value={eventDetails.description}></FormControl>
+                        <InputGroup hasValidation >
+                            <FormControl
+                                required
+                                as="textarea"
+                                rows="3"
+                                placeholder="Enter Event Description"
+                                onChange={handleChange}
+                                name="eventDescription"
+                                value={eventDetails.description}>
+                            </FormControl>
+                            <FormControl.Feedback type="invalid">Please Enter the Event Name</FormControl.Feedback>
+                        </InputGroup>
                     </FormGroup>
-                    <div className="row">
+                    <div className="row mb-3">
                         <div className="col-6">
                             <ValidatedForm />
                         </div>
@@ -188,25 +211,26 @@ function CreateEvent() {
                             />
                         </div>
                     </div>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl placeholder="Price of the Pass" name="price" onChange={handleChange} value={eventDetails.price}></FormControl>
-                    <div className="row" style={{position: "relative"}} >
+                    <FormGroup className="mb-3">
+                        <FormLabel>Price</FormLabel>
+                        <FormControl required placeholder="Price of the Pass" name="price" onChange={handleChange} value={eventDetails.price}></FormControl>
+                    </FormGroup>
+                    <div className="row mb-3" style={{ position: "relative" }} >
                         <div className="col-md-11">
                             <FormLabel>Select Image</FormLabel>
-                            <FormControl id="image" type="file" name="testImage" onChange={handleImage}></FormControl>
+                            <FormControl required id="image" type="file" name="testImage" onChange={handleImage}></FormControl>
                         </div>
                         <div className="col-md-1">
-                            <Button variant="outline-dark" style={{bottom: 0, position: "absolute"}} onClick={() => handleUpload(eventDetails.eventName)} >Upload</Button>
+                            <Button variant="outline-dark" style={{ bottom: 0, position: "absolute" }} onClick={() => handleUpload(eventDetails.eventName)} >Upload</Button>
                         </div>
                     </div>
 
-                    <Button variant="outline-success" style={{ margin: "20px 20px 20px 0px" }} onClick={handleSubmit}>Create Event</Button>
-                    <Button variant="outline-danger" style={{ margin: "20px" }}>Cancel Event</Button>
+                    <Button variant="outline-success" style={{ margin: "20px 20px 20px 0px" }} type="submit">Create Event</Button>
+                    <Button variant="outline-danger" style={{ margin: "20px" }} onClick={() => navigate("/home")}>Cancel Event</Button>
 
                 </Form>
             </div>
         </React.Fragment>
-
     )
 }
 

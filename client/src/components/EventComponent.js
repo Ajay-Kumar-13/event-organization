@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 import CardComponent from "./CardComponent";
 import axios from "axios";
 
-function EventComponent() {
+
+function EventComponent(props) {
 
     const [Events, setEvents] = useState([{
         eventName: "",
@@ -24,7 +25,7 @@ function EventComponent() {
         <React.Fragment>
             <div className="container">
                 <div className="row">
-                    {Events && Events.map((event, index) => <CardComponent key={index} id={event._id} eventName={event.eventName} eventDescription={event.eventDescription} startTime={event.startTime} endTime={event.endTime} price={event.price} eventDate={event.eventDate}/>)}
+                    {Events && Events.map((event, index) => <CardComponent key={index} id={event._id} eventName={event.eventName} eventDescription={event.eventDescription} startTime={event.startTime} endTime={event.endTime} price={event.price} eventDate={event.eventDate} email={props.email}/>)}
                 </div>
             </div>
         </React.Fragment>

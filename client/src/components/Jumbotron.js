@@ -25,7 +25,7 @@ function Jumbotron(props) {
                     <div className="col-12 col-sm-3">
                         <div className="row">
                             <div className="col-12">
-                                <Button variant="outline-dark" style={{padding:"15px", width:"100%", fontWeight:"bold"}} onClick={() => navigate('/register')}>Register for Event</Button>
+                                <Button variant="outline-dark" style={{padding:"15px", width:"100%", fontWeight:"bold"}} onClick={() => navigate('/register', {state: {id:1, email: props.email}})}>Register for Event</Button>
                             </div>
                         </div><br></br>
                         {props.condition ? <div className="row">
