@@ -50,7 +50,7 @@ app.post("/upload", (req, res) => {
             console.log(err);
         }
         else {
-            fsx.move(`uploads/${req.file.originalname}`, `./client/public/${req.body.name}.png`, err => {
+            fsx.move(`uploads/${req.file.originalname}`, `./client/public/images/${req.body.name}.png`, err => {
                 if (err) return console.log(err)
                 console.log("success!!!");
             })

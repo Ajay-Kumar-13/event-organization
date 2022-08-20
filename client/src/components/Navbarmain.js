@@ -24,7 +24,7 @@ function Navbarmain() {
     const handleClose = () => {
         query.RegistrationNumber = "";
         query.Name = "";
-        query.Query="";
+        query.Query = "";
         setShow(false);
     };
     const handleShow = () => {
@@ -45,7 +45,7 @@ function Navbarmain() {
     const handleSend = () => {
         axios.post("/auth/newQuery/save", query)
             .then(res => {
-                if(res.data.success) {
+                if (res.data.success) {
                     window.location.reload();
                 }
             })
@@ -61,9 +61,28 @@ function Navbarmain() {
             })
     }, [])
 
+    useEffect(() => {
+        console.log(window.innerWidth);
+        if (window.innerWidth < 450) {
+            console.log("Came");
+
+            document.getElementById("vdcLogo").classList.remove("ms-auto");
+            document.getElementById("gitamLogo").classList.remove("ms-auto");
+            document.getElementById("navbrand").classList.add("d-none");
+            document.getElementById("navbrand").classList.add("d-sm-block");
+
+        } else {
+            document.getElementById("gitamLogo").classList.add("ms-auto");
+            document.getElementById("vdcLogo").classList.add("ms-auto");
+            document.getElementById("navbrand").classList.remove("d-none");
+            document.getElementById("navbrand").classList.remove("d-sm-block");
+        }
+
+    })
+
     return (
         <Navbar color="light" light >
-            <div>
+            <div className="navbarBrand">
                 <NavbarToggler className="toogleButton" onClick={() => { setIsOpen(!isOpen) }} />
                 <NavbarBrand>
                     <img
@@ -72,6 +91,7 @@ function Navbarmain() {
                         alt="eclub-logo"
                         width="350"
                         height="100"
+                        id="navbrand"
                     />
                 </NavbarBrand>
             </div>
@@ -88,24 +108,28 @@ function Navbarmain() {
                     </NavItem>
                 </Nav>
             </Collapse>
-            <div style={{ position: "absolute", right: 0, top: 0 }}>
-                <img
-                    src="https://vdc.gitam.edu/main_ui/images/logo/GITAM_logo.png"
-                    width="300"
-                    height="100"
-                    className="d-inline-block align-top elogo ms-auto"
-                    alt="gitam-logo"
-                />
-            </div>
-            <div style={{ position: "absolute", right: 250, top: 0 }}>
-                <img
-                    src="https://vdc.gitam.edu/main_ui/images/logo/red_vdc.png"
-                    width="300"
-                    height="100"
-                    className="d-inline-block align-top elogo ms-auto"
-                    alt="vdc-logo"
-                />
-            </div>
+
+            <img
+                src="https://vdc.gitam.edu/main_ui/images/logo/GITAM_logo.png"
+                width="300"
+                height="100"
+                className="d-inline-block align-top elogo ms-auto"
+                alt="gitam-logo"
+                style={{ position: "absolute", right: 0, top: 0 }}
+                id="gitamLogo"
+            />
+
+
+            <img
+                src="https://vdc.gitam.edu/main_ui/images/logo/red_vdc.png"
+                width="300"
+                height="100"
+                className="d-inline-block align-top elogo  ms-auto"
+                alt="vdc-logo"
+                style={{ position: 'absolute', right: 250, top: 0 }}
+                id="vdcLogo"
+            />
+
             <Modal
                 show={show}
                 onHide={handleClose}

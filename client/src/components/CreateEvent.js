@@ -181,7 +181,7 @@ function CreateEvent() {
                                 name="eventDescription"
                                 value={eventDetails.description}>
                             </FormControl>
-                            <FormControl.Feedback type="invalid">Please Enter the Event Name</FormControl.Feedback>
+                            <FormControl.Feedback type="invalid">Enter event Description within 300 letters</FormControl.Feedback>
                         </InputGroup>
                     </FormGroup>
                     <div className="row mb-3">

@@ -4,7 +4,7 @@ import React from "react";
 function BodyComponent() {
 
     function googleAuth() {
-        window.open("http://localhost:3001/auth/google", "_self");
+        window.open("https://eventorganization.herokuapp.com/auth/google", "_self");
     }
 
     return (
@@ -15,6 +15,7 @@ function BodyComponent() {
                 height="500"
                 className="d-inline-block align-top"
                 alt="e-club logo"
+                id="mainLogo"
             />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
