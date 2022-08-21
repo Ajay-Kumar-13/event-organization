@@ -221,6 +221,10 @@ a {
   top:40vh;
 }
 
+.footerBlock {
+  padding: 0;
+}
+
 @keyframes text {
   0% {
     left: 60%;
