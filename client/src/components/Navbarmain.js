@@ -81,6 +81,8 @@ function Navbarmain() {
                 document.getElementById("gitamLogo").classList.remove("ms-auto");
                 document.getElementById("navbrand").classList.add("d-none");
                 document.getElementById("navbrand").classList.add("d-sm-block");
+                document.getElementById("navbrand").classList.add("d-lg-block");
+                document.getElementById("navbrand").classList.add("d-md-none");
 
             } else {
                 document.getElementById("gitamLogo").classList.add("ms-auto");
