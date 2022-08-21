@@ -54,10 +54,17 @@ function Navbarmain() {
     useEffect(() => {
         axios.get("/auth/login/success")
             .then(res => {
-                axios.get("/auth/getRegno/" + res.data.user._json.email)
+                axios.get("/auth/newUser/" + res.data.user._json.email)
                     .then(response => {
-                        setregNo(response.data.regNo);
+                        if (response.data.registered)
+                        {
+                            axios.get("/auth/getRegno/" + res.data.user._json.email)
+                            .then(response => {
+                                setregNo(response.data.regNo);
+                            })
+                        }
                     })
+
             })
     }, [])
 

@@ -37,7 +37,6 @@ function HomeComponent() {
         }
     }
 
-
     return (
         <React.Fragment>
             {loading ? <RingLoader size={80} loading={loading} color={"#36D7B7"} className="ringLoader"/> :
