@@ -69,12 +69,12 @@ function Navbarmain() {
     }, [])
 
     useEffect(() => {
-        window.addEventListener("resize", handleResize);
+        // window.addEventListener("resize", handleResize);
 
-        function handleResize() {
+        // function handleResize() {
             console.log(windowWidth);
 
-            if (window.innerWidth < 450) {
+            if (window.innerWidth < 650) {
                 console.log("Came");
 
                 document.getElementById("vdcLogo").classList.remove("ms-auto");
@@ -90,7 +90,7 @@ function Navbarmain() {
             }
 
             setWindowWidth(window.innerWidth);
-        }
+        // }
     })
 
     return (
