@@ -163,7 +163,7 @@ function CreateEvent() {
     return (
         <React.Fragment>
             <Navbarmain />
-            <div className="container">
+            <div className="container" style={{ width: "90%" }}>
                 <Form className="eventForm" noValidate validated={validate} onSubmit={handleSubmit}>
                     <FormGroup className="mb-3" controlId="validationCustom01">
                         <FormLabel>Name</FormLabel>
@@ -185,10 +185,10 @@ function CreateEvent() {
                         </InputGroup>
                     </FormGroup>
                     <div className="row mb-3">
-                        <div className="col-6">
+                        <div className="col-12 col-md-6">
                             <ValidatedForm />
                         </div>
-                        <div className="col-3">
+                        <div className="col-6 col-md-3">
                             <FormLabel>Start Time</FormLabel>
                             <TimePicker
                                 value={dispatchStartTime}
@@ -199,7 +199,7 @@ function CreateEvent() {
                                 name="startTime"
                             />
                         </div>
-                        <div className="col-3">
+                        <div className="col-6 col-md-3">
                             <FormLabel>End Time</FormLabel>
                             <TimePicker
                                 value={dispatchEndTime}
@@ -215,14 +215,14 @@ function CreateEvent() {
                         <FormLabel>Price</FormLabel>
                         <FormControl required placeholder="Price of the Pass" name="price" onChange={handleChange} value={eventDetails.price}></FormControl>
                     </FormGroup>
-                    <div className="row mb-3" style={{ position: "relative" }} >
-                        <div className="col-md-11">
+                    <div className="row mb-3">
+                        <div className="col-12 col-md-11 mb-3">
                             <FormLabel>Select Image</FormLabel>
                             <FormControl required id="image" type="file" name="testImage" onChange={handleImage}></FormControl>
                         </div>
-                        <div className="col-md-1">
-                            <Button variant="outline-dark" style={{ bottom: 0, position: "absolute" }} onClick={() => handleUpload(eventDetails.eventName)} >Upload</Button>
-                        </div>
+
+                        <Button className="col-12 col-md-1" variant="outline-dark" onClick={() => handleUpload(eventDetails.eventName)} >Upload</Button>
+
                     </div>
 
                     <Button variant="outline-success" style={{ margin: "20px 20px 20px 0px" }} type="submit">Create Event</Button>
