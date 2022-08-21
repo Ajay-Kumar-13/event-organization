@@ -74,7 +74,7 @@ function Navbarmain() {
         function handleResize() {
             console.log(windowWidth);
 
-            if (window.innerWidth < 650) {
+            if (window.innerWidth < 450) {
                 console.log("Came");
 
                 document.getElementById("vdcLogo").classList.remove("ms-auto");
