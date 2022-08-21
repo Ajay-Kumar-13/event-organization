@@ -13,6 +13,7 @@ import axios from "axios";
 
 function Navbarmain() {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [windowWidth, setWindowWidth] = React.useState(0);
     const [show, setShow] = useState(false);
     const [regNo, setregNo] = useState("");
     const [query, setQuery] = useState({
@@ -56,12 +57,11 @@ function Navbarmain() {
             .then(res => {
                 axios.get("/auth/newUser/" + res.data.user._json.email)
                     .then(response => {
-                        if (response.data.registered)
-                        {
+                        if (response.data.registered) {
                             axios.get("/auth/getRegno/" + res.data.user._json.email)
-                            .then(response => {
-                                setregNo(response.data.regNo);
-                            })
+                                .then(response => {
+                                    setregNo(response.data.regNo);
+                                })
                         }
                     })
 
@@ -69,22 +69,28 @@ function Navbarmain() {
     }, [])
 
     useEffect(() => {
-        console.log(window.innerWidth);
-        if (window.innerWidth < 450) {
-            console.log("Came");
+        window.addEventListener("resize", handleResize);
 
-            document.getElementById("vdcLogo").classList.remove("ms-auto");
-            document.getElementById("gitamLogo").classList.remove("ms-auto");
-            document.getElementById("navbrand").classList.add("d-none");
-            document.getElementById("navbrand").classList.add("d-sm-block");
+        function handleResize() {
+            console.log(windowWidth);
 
-        } else {
-            document.getElementById("gitamLogo").classList.add("ms-auto");
-            document.getElementById("vdcLogo").classList.add("ms-auto");
-            document.getElementById("navbrand").classList.remove("d-none");
-            document.getElementById("navbrand").classList.remove("d-sm-block");
+            if (window.innerWidth < 450) {
+                console.log("Came");
+
+                document.getElementById("vdcLogo").classList.remove("ms-auto");
+                document.getElementById("gitamLogo").classList.remove("ms-auto");
+                document.getElementById("navbrand").classList.add("d-none");
+                document.getElementById("navbrand").classList.add("d-sm-block");
+
+            } else {
+                document.getElementById("gitamLogo").classList.add("ms-auto");
+                document.getElementById("vdcLogo").classList.add("ms-auto");
+                document.getElementById("navbrand").classList.remove("d-none");
+                document.getElementById("navbrand").classList.remove("d-sm-block");
+            }
+
+            setWindowWidth(window.innerWidth);
         }
-
     })
 
     return (
